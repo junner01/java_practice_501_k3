@@ -1,17 +1,18 @@
 package ex_241023_ch9;
 
 import java.awt.Container;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class MouseListenerEx extends JFrame {
+public class MouseAdapterClass extends JFrame {
 	// 재사용하는 라벨 한개. 싱글톤, 인스턴스 하나로
 	private JLabel la = new JLabel("Hello"); // "Hello" 레이블
 
-	public MouseListenerEx() {
+	public MouseAdapterClass() {
 		// 프레임 창의 제목
 		setTitle("Mouse 이벤트 예제");
 		// 창을 닫기 클릭시, 화면도 안보이고, 프로그램 정상 종료
@@ -19,7 +20,7 @@ public class MouseListenerEx extends JFrame {
 		// 프레임에서, 기본 패널을 선택. 
 		Container c = getContentPane();
 		// 프레임의 기본 패널에 -> 이벤트 리스너를 추가. 
-		c.addMouseListener(new MyMouseListener());
+		c.addMouseListener(new MyMouseAdapter());
 		// 배치 관리자를 선택 안함. 사용자 직접 라벨의 크기 및 위치를 조정 가능. 
 		c.setLayout(null);
 
@@ -33,29 +34,18 @@ public class MouseListenerEx extends JFrame {
 		setVisible(true);
 	}
 
-	class MyMouseListener implements MouseListener {
+	class MyMouseAdapter extends MouseAdapter {
 		public void mousePressed(MouseEvent e) {
 			
 			int x = e.getX(); // 마우스의 클릭 좌표 x
 			int y = e.getY(); // 마우스의 클릭 좌표 y
 			la.setLocation(x, y); // (x,y) 위치로 레이블 이동
 		}
-		@Override
-		public void mouseClicked(MouseEvent e) {
-		}
-		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
-		@Override
-		public void mouseEntered(MouseEvent e) {
-		}
-		@Override
-		public void mouseExited(MouseEvent e) {
-		}
+		
 	} // Listener
 
 	public static void main(String[] args) {
-		new MouseListenerEx();
+		new MouseAdapterClass();
 	} // main 
 } // 마우스 리스너 클래스. 
 
