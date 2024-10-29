@@ -1,16 +1,16 @@
-package ex_241023_ch7.homework;
+package ex_241023_ch7.homework2;
 
 import java.time.LocalDate;
 
-public class Hcb0402_Person {
+public class Kjh0313A {
 	//property
 	private String name;
 	private String phone;
 	private LocalDate date;
 	
 	//constructor
-	public Hcb0402_Person() {};
-	public Hcb0402_Person(String name, int phone, LocalDate date) {
+	public Kjh0313A() {};
+	public Kjh0313A(String name, int phone, LocalDate date) {
 	this.name=name;
 	this.phone=Integer.toString(phone);
 	this.date = date;
@@ -33,4 +33,4 @@ public class Hcb0402_Person {
 	this.phone=Integer.toString(phone);
 	this.date = date;
 	}
-}
+}  
