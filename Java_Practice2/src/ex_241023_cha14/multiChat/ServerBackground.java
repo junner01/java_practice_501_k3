@@ -24,6 +24,11 @@ public class ServerBackground {
     // 값 : DataOutputStream, 소켓을 이용해서, 상대방이 입력받은 내용을 출력을 해주는 기능. 
     // clientMap : 모든 사용자의 이름과, 해당 이름에 대한 출력을 하는 기능인 인스턴스가 들어가 있음. 
     
+    // 입장한 유저의 이름, key 
+    // DataOutputStream : 상대방에게 데이터를 바이트 기반으로 전달하는 도구.
+    // 예) 서버 : 상용, 클라이언트 : 두현, 클라이언트2 : 상화 
+    // 키: 두현, 값 : 두현이 상대방에게 전달하는 도구 장착 DataOutputStream
+    // 키: 상화, 값 : 상화 상대방에게 전달하는 도구 장착 DataOutputStream
     private Map<String, DataOutputStream> clientMap = new HashMap<String, DataOutputStream>();
  
     public void setGui(ServerGUI gui) {
@@ -50,6 +55,13 @@ public class ServerBackground {
                 // 소켓이 , 클라이언트가 요청을하면 수락을 하는 기능, 
                 // 수락을하면 , 서버 <-->클라이언트 , 연결고리:소켓
                 socket = serverSocket.accept(); // 여기서 클라이언트 받음
+                // 클라이언트, 두현, 상화 예제
+                // 두현 접속 요청, 상용 수락. 
+                // 두현의 소켓이 만들어짐 -> 두현 접속 아이피 확인가능. 
+                // 두현의 소켓 이용해서, Receiver 인스턴스 , 스레드 동작. 
+                
+                // 상화의 소켓이 만들어짐 -> 상화 접속 아이피 확인가능. 
+                // 상화의 소켓 이용해서, Receiver 인스턴스 , 스레드 동작.
                 // socket 의 여러 기능중 하나이고, getInetAddress, 정보를 출력해줌. 
                 System.out.println(socket.getInetAddress() + "에서 접속했습니다.");
                 
@@ -120,9 +132,12 @@ public class ServerBackground {
     // 스레드 정의 1) Thread 상속 2) Runnable 인터페이스를 구현
     class Receiver extends Thread {
         /** XXX 리시버가 할일 : 네트워크 소켓을 받아서 계속듣고 보내는 일. */
-    	// 데이터, 메세지를 전달하는 역할. 
+    	// 데이터, 메세지를 전달하는 역할.
+    	// 상대방으로터 전달 받은 메세지를 읽는 역할. 
         private DataInputStream in; // 데이터 입력 스트림
+        // 상대방에게 전달 할 메세지를 쓰는 역할. 
         private DataOutputStream out; // 데이터 아웃풋 스트림
+        // 접속시 사용할 닉네임. 
         private String nick;
         
         // 생성자, Socket 타입의 인스턴스를 받고 있다. 

@@ -23,6 +23,17 @@ public class ServerGUI extends JFrame implements ActionListener {
 	// 이런 기법 ? , 예) 모바일에서, 해당 앱 버전의 1.0.0, 업데이트 할 때. 
 	// 버전의 숫자를 변경해서, 프로그램에 저장, 
 	// 예) 커밋 번호와 비슷하다. 버전 관리를 하는 식별 번호다. 
+	// 객체의 직렬화, 클래스 타입의 인스턴스 -> 중간 데이터 타입으로 변경. 전달.  
+	// 역직렬화 , 클래스 타입의 인스턴스 <- 중간 데이터 타입으로 변경. 전달.
+	// 예) class Person {
+	//       String name; 멤버(속성)
+	//       int     age;  멤버(속성)
+	//		 Stinfg hobby; 멤버 추가, 클래스 변경. 
+	// 전달 하는 경우, 네트워크 통신 이용해서, 상대방에게 전달. -> 문자열로 전달. 
+	// JSON 자바스크립트 객체 타입을 이용해서 -> 문자열로 변환해서, 전달, : 객체의 직렬화 
+	// 받는 입장에서, 문자열 -> JSON 타입을 변경. : 객체의 역직렬화. 
+	// 모바일 앱을 구글플레이 스토어 출시하는 경우, 처음, ver 1.0.0
+	// 
 	private static final long serialVersionUID = 1L;
 	
 	// HTML input 타입에서, 텍스트 필드 (여러 입력이 가능한, 멀티 라인)
@@ -76,7 +87,11 @@ public class ServerGUI extends JFrame implements ActionListener {
 		setTitle("서버부분");
 		// server : 백그라운드의 인스턴스에서, 
 		// 해당 인스턴스의 멤버중에, 현재 작업하는 클래스 이름 : ServerGUI
-		// 멤버로 가지고 있고, setGui 세터를 통해서, 멤버를 업데이트함. 
+		// 멤버로 가지고 있고, setGui 세터를 통해서, 멤버를 업데이트함.
+		
+		// server : ServerBackground , 2번클래스의 인스턴스. 
+		// 인스턴스 이용해서, 2번 클래스 멤버, 기능등을 이용 가능함.
+		// this ->  ServerGUI, 1번 클래스 인스턴스 -> 참조형 변수 -> 0x100
 		server.setGui(this);
 		
 		// ServerGUI -> 화면 부분 설명 후 , 다시 돌아와서 설명하기. 
