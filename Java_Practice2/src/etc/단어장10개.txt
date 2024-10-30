@@ -1,0 +1,10 @@
+banana,바나나
+red,빨강
+soup,수프
+green,초록
+blue,파랑
+car,자동차
+yellow,노랑
+house,집
+key,열쇠
+cup,컵
