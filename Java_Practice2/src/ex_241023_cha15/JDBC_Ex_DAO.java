@@ -25,8 +25,10 @@ public class JDBC_Ex_DAO {
 		}
 	}
 
+	// ArrayList<JDBC_Ex_DTO> , 리스트에 지정한 모델만 받겠다.
 	public ArrayList<JDBC_Ex_DTO> select() {
 		ArrayList<JDBC_Ex_DTO> list = new ArrayList<JDBC_Ex_DTO>();
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -68,5 +70,38 @@ public class JDBC_Ex_DAO {
 			}
 		}
 		return list;
-	}
+	}// select
+
+	// insert 기능 넣기.
+	public int insertDB(int deptNo, String deptName, String loc) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			con = DriverManager.getConnection(url, userid, passwd);
+			String sql = "INSERT INTO dept(deptno,dname,loc)" + "VALUES(?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, deptNo);
+			pstmt.setString(2, deptName);
+			pstmt.setString(3, loc);
+			result = pstmt.executeUpdate();
+			System.out.println(result + "개의 레코드가 저장");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}// finally
+		return result;
+	} // insert 
+
 }
+
+
+
