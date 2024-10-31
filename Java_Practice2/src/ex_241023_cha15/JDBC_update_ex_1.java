@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class JDBC_insert_ex_1 {
+public class JDBC_update_ex_1 {
 	public static void main(String[] args) {
 		 String driver = "oracle.jdbc.driver.OracleDriver";   // 10행 ~ 14행 데이터베이스 
 		 //접속을 위한 4가지 정보를 String  변수에  저장.
@@ -24,21 +24,21 @@ public class JDBC_insert_ex_1 {
 			 con = DriverManager.getConnection(url, userid, passwd); 
 			 // DriverManager 클래스의 getConnection() 메소드를 이용해서
 //			 Connection 객체를 얻는다. 
-			 String sql = "INSERT INTO dept(deptno,dname,loc)" + "VALUES(?,?,?)";
+			 String sql = "UPDATE dept SET dname = ? , loc = ? WHERE deptno = ?";
 			 //요청할 SQL  문을 String 변수에 저장한다. 이때 저장할 데이터 대신에 '?' 
 			 //기호를 사용한다. 나중에 PreparedStatement 객체의 set()메소드를 
 			 //사용하여 값을 동적으로 설정한다. 
 			 pstmt = con.prepareStatement(sql);
-			 pstmt.setInt(1, 80);
-			 pstmt.setString(2, "개발3");
-			 pstmt.setString(3, "부산3");
+			 pstmt.setString(1, "인사");
+			 pstmt.setString(2, "부산");
+			 pstmt.setInt(3, 50);
 			 //SQL 문 전송에 필요한 PreparedStatement 객체를 
 			 //Connection 객체의 preparedStatement(sql)메소드를 이용해서 얻고 '?' 대신에 
 			 //설정할 값을 인덱스(1부터 시작) 를 사용하여 set() 메소드로 설정한다.
 		     int n = pstmt.executeUpdate();
-		     // INSERT 문을 요청하기 때문에 executeUpdate() 메소드를 
+		     // UPDATE 문을 요청하기 때문에 executeUpdate() 메소드를 
 		     //사용하며 결과는 int 형으로 저장한다. 
-		     System.out.println(n+"개의 레코드가 저장");
+		     System.out.println(n+"개의 레코드가 수정");
 		     // 반환된 정수값을 출력하면 SQL 문을 실행한 뒤에 데이터베이스에 적용된 
 		     // 레코드의 개수를 알수 있다. 
 				 }catch(Exception e) {
