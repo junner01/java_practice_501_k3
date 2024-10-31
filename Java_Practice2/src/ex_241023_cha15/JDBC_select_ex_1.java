@@ -34,6 +34,7 @@ public class JDBC_select_ex_1 {
 			 // DriverManager 클래스의 getConnection() 메소드를 이용해서
 //			 Connection 객체를 얻는다. 
 			 // 디비 서버에게 일을 시킬려면, sql 라는 문법을 전달해야함. 
+			 // SELECT 조회할 열1, 조회할 열2,... FROM 조회할 테이블명; 
 			 String query = "SELECT deptno,dname,loc FROM dept";
 			 //요청할 SQL  문을 String 변수에 저장한다.
 			 // 서버에 일을 시킬 준비가 완료됨. 

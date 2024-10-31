@@ -24,6 +24,7 @@ public class JDBC_update_ex_1 {
 			 con = DriverManager.getConnection(url, userid, passwd); 
 			 // DriverManager 클래스의 getConnection() 메소드를 이용해서
 //			 Connection 객체를 얻는다. 
+			 // UPDATE 수정할테이블명 SET 업데이트할컬럼1 = 수정할값1,업데이트할컬럼2 = 수정할값2, WHERE 조건절
 			 String sql = "UPDATE dept SET dname = ? , loc = ? WHERE deptno = ?";
 			 //요청할 SQL  문을 String 변수에 저장한다. 이때 저장할 데이터 대신에 '?' 
 			 //기호를 사용한다. 나중에 PreparedStatement 객체의 set()메소드를 

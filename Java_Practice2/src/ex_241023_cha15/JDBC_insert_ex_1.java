@@ -24,6 +24,7 @@ public class JDBC_insert_ex_1 {
 			 con = DriverManager.getConnection(url, userid, passwd); 
 			 // DriverManager 클래스의 getConnection() 메소드를 이용해서
 //			 Connection 객체를 얻는다. 
+			 //INSERT INTO 추가할테이블명(각컬럼열1,각컬럼열2,각컬럼열3) VALUES (각열에추가할값1,각열에추가할값2,각열에추가할값3,)
 			 String sql = "INSERT INTO dept(deptno,dname,loc)" + "VALUES(?,?,?)";
 			 //요청할 SQL  문을 String 변수에 저장한다. 이때 저장할 데이터 대신에 '?' 
 			 //기호를 사용한다. 나중에 PreparedStatement 객체의 set()메소드를 
