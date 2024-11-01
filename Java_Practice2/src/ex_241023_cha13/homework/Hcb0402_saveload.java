@@ -2,11 +2,14 @@ package ex_241023_cha13.homework;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
@@ -38,6 +41,8 @@ public class Hcb0402_saveload {
 	// method out
 	// key는 jslidepane에 추가
 	public static void outWordpad() {
+		// 왼쪽 영단어 패널 초기화
+		englishPanel.removeAll();
 		for (Map.Entry<String, String> i : wordsSet) {
 			JLabel keyLabel = new JLabel(i.getKey());
 			// 기존에는 value를 jlabel에 붙여서 그 label의 visible을 조절했지만
@@ -60,9 +65,7 @@ public class Hcb0402_saveload {
 			});
 			//따로 center에 value를 추가할 필요 없음
 		}
-		gridP.revalidate();
 		englishPanel.revalidate();
-		gridP.repaint();
 		englishPanel.repaint();
 	}
 
@@ -72,7 +75,7 @@ public class Hcb0402_saveload {
 		File saveFile = new File("c:\\Temp\\Hcb0402_wordTest.txt");
 		try {
 			// fout 생성
-			FileOutputStream fout = new FileOutputStream(saveFile);
+			BufferedWriter buf = new BufferedWriter(new FileWriter(saveFile));
 			// map의 key와 value를 각각 string배열로 할당
 			String[] keyStrings = words.keySet().toArray(new String[0]);
 			String[] valueStrings = words.values().toArray(new String[0]);
@@ -81,17 +84,17 @@ public class Hcb0402_saveload {
 				try {
 					// 마지막에 , 이 들어가면 나중에 불러올 때 마지막에 공백이 생기므로
 					if (i + 1 == keyStrings.length) {
-						String writeString = keyStrings + "," + valueStrings;
-						fout.write(writeString.getBytes());
+						String writeString = keyStrings[i] + "," + valueStrings[i];
+						buf.write(writeString);
 					} else {
-						String writeString = keyStrings + "," + valueStrings + ",";
-						fout.write(writeString.getBytes());
+						String writeString = keyStrings[i] + "," + valueStrings[i] + ",";
+						buf.write(writeString);
 					}
 				} catch (IOException e) {
 					JOptionPane.showMessageDialog(null, "IO오류.", "IO오류: 파일을 쓰는데 오류가 발생했습니다", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-			fout.close();
+			buf.close();
 		} catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "파일을 만들어주세요.", "파일오류: 파일이 없습니다", JOptionPane.ERROR_MESSAGE);
 		} catch (IOException e) {

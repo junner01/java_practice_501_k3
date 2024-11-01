@@ -9,10 +9,13 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class LsyTest1205DAO {
+	// DAO(Data Access Object), 비지니스 로직 처리하는 기능 모음집
+	// crud, -> insert, select(전체조회), update, delete, select(한명 조회,email, id)
 	public boolean insertMember(LsyTest1205DTO lsyTest1205DTO) {
 		boolean ok = false;
 		Connection con = null; // 연결
 		PreparedStatement pstmt = null; // 명령
+		
 		// MemberDTO memberDTO, 객체, 인스턴스, 게터, 세터.
 		// 게터로 각 요소를 하나씩 꺼내기.
 		int id = lsyTest1205DTO.getId();
@@ -20,6 +23,7 @@ public class LsyTest1205DAO {
 		String email = lsyTest1205DTO.getEmail();
 		String password = lsyTest1205DTO.getPassword();
 		try {
+			
 			con = ConnectionDB.getConn();
 			String sql = "insert into member501(" + "id,name,email,password" + ") "
 					+ "values(member501_seq.NEXTVAL,?,?,?)";
@@ -27,6 +31,7 @@ public class LsyTest1205DAO {
 			pstmt.setString(1, name);
 			pstmt.setString(2, email);
 			pstmt.setString(3, password);
+			
 			int r = pstmt.executeUpdate(); // 실행 -> 저장
 			if (r > 0) {
 				System.out.println("insert 성공");
@@ -52,22 +57,27 @@ public class LsyTest1205DAO {
 
 	// 조회
 	public ArrayList<LsyTest1205DTO> selectAllMember() {
+		
 		Connection con = null; // 연결
 		PreparedStatement pstmt = null; // 명령
 		ResultSet rs = null; // 결과
+		
 		ArrayList<LsyTest1205DTO> resultList = null;
 		try {
 			con = ConnectionDB.getConn();
 			String sql = "select * from member501 order by id desc";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
+			
 			resultList = new ArrayList<LsyTest1205DTO>();
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
 				String email = rs.getString("email");
 				String password = rs.getString("password");
+				
 				LsyTest1205DTO dto = new LsyTest1205DTO(id, name, email, password);
+				
 				resultList.add(dto);
 
 			} // while
@@ -113,6 +123,7 @@ public class LsyTest1205DAO {
 				String name = rs.getString("name");
 				String email = rs.getString("email");
 				String password = rs.getString("password");
+				
 				dto = new LsyTest1205DTO(id, name, email, password);
 			}
 		} catch (Exception e) {
@@ -217,7 +228,7 @@ public class LsyTest1205DAO {
 	}
 	// 삭제
 
-	// 수정
+	// 수정, 13번 라인에서, ( 모델 DTO에 전부 담아서 전달함), 밑에 방식 보다는 모델에 담아서 전달함.
 	public void updateMember(int user_id, String userName, String userEmail, String password) {
 
 		Connection con = null; // 연결

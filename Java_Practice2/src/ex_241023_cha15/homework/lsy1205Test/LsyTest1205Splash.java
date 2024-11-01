@@ -13,7 +13,6 @@ public class LsyTest1205Splash extends JFrame {
 
 	public LsyTest1205Splash() {
 		// 스플래시 화면 프레임 생성
-		JFrame splashFrame = new JFrame();
 		setUndecorated(true); // 테두리 없는 창
 		setSize(1000, 800);
 		setLocationRelativeTo(null); // 화면 중앙에 위치
@@ -44,3 +43,7 @@ public class LsyTest1205Splash extends JFrame {
 		dispose();
 	}
 }
+
+
+
+

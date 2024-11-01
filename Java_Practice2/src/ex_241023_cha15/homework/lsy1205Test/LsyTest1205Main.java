@@ -36,7 +36,6 @@ public class LsyTest1205Main extends JFrame {
 	private JButton updateBtn;
 	// 선언만 했음.
 	private JButton deleteBtn;
-	private JButton clearBtn;
 
 	LsyTest1205DAO dao = null;
 
@@ -47,6 +46,7 @@ public class LsyTest1205Main extends JFrame {
 		setLocationRelativeTo(null); // 화면 가운데 정렬
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		// 디비에 기능 구현을 하는 도구. insert, select, update, delete 
 		dao = new LsyTest1205DAO();
 		setLayout(new BorderLayout());
 
@@ -85,15 +85,15 @@ public class LsyTest1205Main extends JFrame {
 			if (!e.getValueIsAdjusting()) { // 선택이 완전히 끝났을 때만 실행
 				String selectedWord = memberList.getSelectedValue();
 				if (selectedWord != null) {
-//					System.out.println("selectedWord : " + selectedWord);
+					System.out.println("selectedWord : " + selectedWord);
 					String[] parts = selectedWord.split(","); // 쉼표를 기준으로 분리
 					String idPart = parts[0].trim(); // "id=26" 부분 선택
 					String idValue = idPart.split("=")[1].trim(); // "="을 기준으로 분리하여 숫자만 추출
 					int id = Integer.parseInt(idValue); // 숫자로 변환
-//					System.out.println("ID 값: " + id);
+					System.out.println("ID 값: " + id);
 
 					LsyTest1205DTO member = dao.selectMemberById(id); // ID가 1인 회원 정보 조회
-//					System.out.println("member 확인 : " + member.toString());
+					System.out.println("member 확인 : " + member.toString());
 					// JFrame 설정, 상세보기 창 전환
 					newFrame(member);
 				}
